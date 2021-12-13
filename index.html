@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        LOUD Feed Format v0.0.2
+    </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important;position:relative}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit;overflow:visible}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.figma{display:table;position:relative;width:100%;padding-bottom:56.25%}.figma iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;border:1px solid #eee}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{height:40px;padding:10px 4px;border-top-left-radius:0;border-bottom-left-radius:0}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:20px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:50%;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;text-decoration:none;padding-left:22px}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em;font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><p><img src="https://user-images.githubusercontent.com/34389545/120880895-cc64fe80-c592-11eb-963f-068474c916da.jpg" alt="loudbanner" loading="lazy"></p><h1 id="LOUD-Feed-Format-v002" data-id="LOUD-Feed-Format-v002"><a class="anchor hidden-xs" href="#LOUD-Feed-Format-v002" title="LOUD-Feed-Format-v002"><span class="octicon octicon-link"></span></a><span>LOUD Feed Format </span><code>v0.0.2</code></h1><h2 id="Proposal-for-a-podcasting-first-feed-syndication-protocol" data-id="Proposal-for-a-podcasting-first-feed-syndication-protocol"><a class="anchor hidden-xs" href="#Proposal-for-a-podcasting-first-feed-syndication-protocol" title="Proposal-for-a-podcasting-first-feed-syndication-protocol"><span class="octicon octicon-link"></span></a><span>Proposal for a podcasting-first feed syndication protocol</span></h2><ul>
+<li><span>File extensions: </span><code>.loud</code></span></li>
+<li><span>Publish feeds in JSON</span></li>
+<li><span>Multiple shows per feed (one feed, one network)</span></li>
+<li><span>Chaptered episodes</span></li>
+<li><span>Multiple file formats per episode for high, low, mobile quality</span></li>
+<li><span>Respectful of creators and guests, credit everyone</span></li>
+<li><span>Allows for referencing citations</span></li>
+</ul><h3 id="File-Extensions" data-id="File-Extensions"><a class="anchor hidden-xs" href="#File-Extensions" title="File-Extensions"><span class="octicon octicon-link"></span></a><span>File Extensions</span></h3><p><span>LOUD feeds are published in </span><code>.loud</code><span> format</strong><span>. The default file extension is </span><code>.loud</code><span>.</span></p><h3 id="File-Format" data-id="File-Format"><a class="anchor hidden-xs" href="#File-Format" title="File-Format"><span class="octicon octicon-link"></span></a><span>File Format</span></h3><p><span>LOUD feeds are UTF8 and made of JSON.</span></p><h3 id="Enhanced-Discovery" data-id="Enhanced-Discovery"><a class="anchor hidden-xs" href="#Enhanced-Discovery" title="Enhanced-Discovery"><span class="octicon octicon-link"></span></a><span>Enhanced Discovery</span></h3><p><span>Feeds can contain one or more shows for the purposes of show discovery within a podcast network. Podcast networks often have different “shows” or concepts under the same network or publisher, but no good way to foster ‘connectivity’ between each different show concept. Users have to be told to find and subscribe to the new show, when it could be simply added to their existing subscription, giving you a complete built-in audience with nobody left behind.</span></p><h3 id="Chaptered-Episodes" data-id="Chaptered-Episodes"><a class="anchor hidden-xs" href="#Chaptered-Episodes" title="Chaptered-Episodes"><span class="octicon octicon-link"></span></a><span>Chaptered Episodes</span></h3><p><span>Timestamped chapters with names and descriptions for each segment facilitate labeling the timeline with linked portions of the content.</span></p><h3 id="Multiple-Format-Audio" data-id="Multiple-Format-Audio"><a class="anchor hidden-xs" href="#Multiple-Format-Audio" title="Multiple-Format-Audio"><span class="octicon octicon-link"></span></a><span>Multiple Format Audio</span></h3><p><span>Each episode can have multiple listed audio files for different qualities and file formats.</span></p><h3 id="Credit-Everyone" data-id="Credit-Everyone"><a class="anchor hidden-xs" href="#Credit-Everyone" title="Credit-Everyone"><span class="octicon octicon-link"></span></a><span>Credit Everyone</span></h3><p><span>Credits for staff, producers, creators and editors have a dedicated field for acknowledging their contributions</span></p><h3 id="References-Citations" data-id="References-Citations"><a class="anchor hidden-xs" href="#References-Citations" title="References-Citations"><span class="octicon octicon-link"></span></a><span>References Citations</span></h3><p><span>Sources, citations, and links to further reading are included in the episode object for providing relevant information to the listener</span></p><h1 id="FAQ" data-id="FAQ"><a class="anchor hidden-xs" href="#FAQ" title="FAQ"><span class="octicon octicon-link"></span></a><span>FAQ</span></h1><h3 id="Why-not-use-RSS" data-id="Why-not-use-RSS"><a class="anchor hidden-xs" href="#Why-not-use-RSS" title="Why-not-use-RSS"><span class="octicon octicon-link"></span></a><span>Why not use RSS?</span></h3><p><span>The internet is a big place with room for many ideas. RSS and Atom are great general syndication formats, but lack features that matter to podcasts specifically like chapters, proper credits and citations, and multiple format audio. The RSS specification states that it is no longer in development and should be considered to be in a frozen state, and it is suggested to build a new format with a different name if change is desired. </span><a href="https://cyber.harvard.edu/rss/rss.html#roadmap" target="_blank" rel="noopener"><span>https://cyber.harvard.edu/rss/rss.html#roadmap</span></a></p><h3 id="Why-not-improve-an-existing-protocol" data-id="Why-not-improve-an-existing-protocol"><a class="anchor hidden-xs" href="#Why-not-improve-an-existing-protocol" title="Why-not-improve-an-existing-protocol"><span class="octicon octicon-link"></span></a><span>Why not improve an existing protocol?</span></h3><p><span>RSS and Atom are great formats that provide more value every day to blog articles and news feeds than podcasts. Podcasts are a rapidly growing medium that require a more purposeful solution. Ratifying well-established protocols are an exercise in patience and moderation. Some of these ideas will be radical in nature, and it is this project’s goal to thrive in a cooperational and non-confrontational manner with other projects and existing standards.</span></p><h3 id="Why-multiple-shows-in-the-same-feed" data-id="Why-multiple-shows-in-the-same-feed"><a class="anchor hidden-xs" href="#Why-multiple-shows-in-the-same-feed" title="Why-multiple-shows-in-the-same-feed"><span class="octicon octicon-link"></span></a><span>Why multiple shows in the same feed?</span></h3><p><span>The process of discovery is often limited by the capabilities of the podcast directory. Putting multiple shows into a parent-network format allows users to be introduced to new shows via the same feed, with one subscription and a single polling for new episodes.</span></p><h3 id="Is-LOUD-an-IETF-standard" data-id="Is-LOUD-an-IETF-standard"><a class="anchor hidden-xs" href="#Is-LOUD-an-IETF-standard" title="Is-LOUD-an-IETF-standard"><span class="octicon octicon-link"></span></a><span>Is LOUD an IETF standard?</span></h3><p><span>No, but that would be nice.</span></p><h3 id="How-can-I-help" data-id="How-can-I-help"><a class="anchor hidden-xs" href="#How-can-I-help" title="How-can-I-help"><span class="octicon octicon-link"></span></a><span>How can I help?</span></h3><p><span>Port </span><code>.loud</code><span> format feeds to your favorite podcast client! Publish your feeds in LOUD Feed Format along side your RSS or Atom feed! The spec is simple, and easy to implement.</span></p><h1 id="License" data-id="License"><a class="anchor hidden-xs" href="#License" title="License"><span class="octicon octicon-link"></span></a><span>License</span></h1><p><span>The MIT License (MIT)</span><br>
+<span>Copyright © 2021 LOUD </span></p><p><span>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</span></p><p><span>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</span></p><p><span>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span></p><h1 id="Example" data-id="Example"><a class="anchor hidden-xs" href="#Example" title="Example"><span class="octicon octicon-link"></span></a><span>Example</span></h1><h2 id="JSON" data-id="JSON"><a class="anchor hidden-xs" href="#JSON" title="JSON"><span class="octicon octicon-link"></span></a><span>JSON</span></h2><pre><code class="json hljs"><div class="wrapper"><div class="gutter linenumber"> 
+ 
+ 
+<span></span></div><div class="code"><span class="token punctuation">{</span>
+  <span class="token property">"Protocol"</span><span class="token operator">:</span> <span class="token string">"LOUD"</span><span class="token punctuation">,</span>
+  <span class="token property">"Version"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"NetworkName"</span><span class="token operator">:</span> <span class="token string">"The LOUD Podcast Network"</span><span class="token punctuation">,</span>
+  <span class="token property">"NetworkDescription"</span><span class="token operator">:</span> <span class="token string">"A network of LOUD syndicated podcasts"</span><span class="token punctuation">,</span>
+  <span class="token property">"WebsiteURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://readme.loud.so"</span><span class="token punctuation">,</span>
+    <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"The LOUD feed spec documentation link"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"FeedURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/donut-time/podcast.donut-time.com/master/public/feed.loud"</span><span class="token punctuation">,</span>
+    <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"The LOUD Network feed"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"DateCreated"</span><span class="token operator">:</span> <span class="token string">"2021-06-04"</span><span class="token punctuation">,</span>
+  <span class="token property">"BannerURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/image-bannerurl.jpg"</span><span class="token punctuation">,</span>
+    <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Banner graphic for The LOUD Network"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"AvatarURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://avatars.example.com/user.jpg"</span><span class="token punctuation">,</span>
+    <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Avatar graphic for The LOUD Network"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"FavIcoURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://user-images.example.com/favico.png"</span><span class="token punctuation">,</span>
+    <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Favicon for The LOUD Network"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"Tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"LOUD"</span><span class="token punctuation">,</span>
+    <span class="token string">"Feed"</span><span class="token punctuation">,</span>
+    <span class="token string">"Syndication"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"FeedCredit"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"Loudy Louderson"</span><span class="token punctuation">,</span>
+      <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator"</span><span class="token punctuation">,</span>
+      <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/donuts-are-good"</span><span class="token punctuation">,</span>
+          <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Loudy's profile page"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"Bobby Tables"</span><span class="token punctuation">,</span>
+      <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator, Editor"</span><span class="token punctuation">,</span>
+      <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/bobbytablessoleet"</span><span class="token punctuation">,</span>
+          <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Bobby Table's profile page"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"Shows"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"ShowName"</span><span class="token operator">:</span> <span class="token string">"The donut-time Podcast"</span><span class="token punctuation">,</span>
+      <span class="token property">"ShowDescription"</span><span class="token operator">:</span> <span class="token string">"Discussing jelly-filled donuts,  carbolization, tastiness and best of all, donut-time!"</span><span class="token punctuation">,</span>
+      <span class="token property">"WebsiteURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://donut-time.com"</span><span class="token punctuation">,</span>
+        <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"The donut-time website link"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"DateCreated"</span><span class="token operator">:</span> <span class="token string">"2021-06-01"</span><span class="token punctuation">,</span>
+      <span class="token property">"BannerURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/ffeueuu.jpg"</span><span class="token punctuation">,</span>
+        <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Banner graphic for The donut-time Podcast"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"AvatarURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://avatars.example.com/iuhwegw.jpg"</span><span class="token punctuation">,</span>
+        <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Avatar graphic for The donut-time Podcast"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"FavIcoURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"avatars.example.com/image.jpg"</span><span class="token punctuation">,</span>
+        <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Favicon for The donut-time Podcast"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"Tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"donut-time"</span><span class="token punctuation">,</span>
+        <span class="token string">"jelly-filled donuts"</span><span class="token punctuation">,</span>
+        <span class="token string">"tastiness"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"ShowCredit"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"loudy"</span><span class="token punctuation">,</span>
+          <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator"</span><span class="token punctuation">,</span>
+          <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/loudy"</span><span class="token punctuation">,</span>
+              <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Loudy's profile page"</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"Mr Kruller"</span><span class="token punctuation">,</span>
+          <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator, Editor"</span><span class="token punctuation">,</span>
+          <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/Mr. Kruller"</span><span class="token punctuation">,</span>
+              <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Mr Kruller's profile page"</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"Episodes"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"SeriesNumber"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+          <span class="token property">"EpisodeName"</span><span class="token operator">:</span> <span class="token string">"How did you hear about donut-time"</span><span class="token punctuation">,</span>
+          <span class="token property">"EpisodeDescription"</span><span class="token operator">:</span> <span class="token string">"This was our first episode of the podcast, we didn't intend for it to be a podcast, but we had so much fun making it we decided to make podcasting one of the things we do. This one has some rough audio, but if you can stomache it, it's a good show."</span><span class="token punctuation">,</span>
+          <span class="token property">"WebsiteURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://www.example.com/video"</span><span class="token punctuation">,</span>
+            <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Link to this episode's video"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"ImageURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"avatars.com/exampe.jpg"</span><span class="token punctuation">,</span>
+            <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Episode art image thumbnail"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"AudioURL"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/ZtypF9.mp3"</span><span class="token punctuation">,</span>
+              <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"High quality audio file, mp3"</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"DateCreated"</span><span class="token operator">:</span> <span class="token string">"2021-05-16"</span><span class="token punctuation">,</span>
+          <span class="token property">"DateUpdated"</span><span class="token operator">:</span> <span class="token string">"2021-05-16"</span><span class="token punctuation">,</span>
+          <span class="token property">"DurationSeconds"</span><span class="token operator">:</span> <span class="token number">5980</span><span class="token punctuation">,</span>
+          <span class="token property">"CitedURL"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://youtube.com/donut-time"</span><span class="token punctuation">,</span>
+              <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"This is our YouTube channel, subscribe for more podcasts!"</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"TranscriptionURL"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"EpisodeCredit"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"loudy"</span><span class="token punctuation">,</span>
+              <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator"</span><span class="token punctuation">,</span>
+              <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/loudy"</span><span class="token punctuation">,</span>
+                  <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"loudy's profile page"</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"Mr Kruller"</span><span class="token punctuation">,</span>
+              <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator, Editor"</span><span class="token punctuation">,</span>
+              <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/Mr. Kruller"</span><span class="token punctuation">,</span>
+                  <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Mr Kruller's profile page"</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"Chapters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Intro"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"Finding our feet live on stream"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">270</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"lemonjelly"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"lemonjellys entrance into baking and donut-time"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">580</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"User stories"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"Users describe how they entered the donut-time community"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">1650</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"New icing"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"Or is it Cream Cheese? :)"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">2790</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"pink icing"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"The pink icing club and the early vegan origins of donut-time"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">3300</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Raspberry pie baking"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"Humble beginnings in baking donut-time"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">3850</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"More icing"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"The same baking site keeps coming up"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">3917</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"gluten-free"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"The humble beginnings of donut-time as a gluten-free project."</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">5727</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"The Truth"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"The best story of them all"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"SeriesNumber"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">"EpisodeName"</span><span class="token operator">:</span> <span class="token string">"grams and Dusty Shells"</span><span class="token punctuation">,</span>
+          <span class="token property">"EpisodeDescription"</span><span class="token operator">:</span> <span class="token string">"A question we get a lot pertains to whats the difference between baking soda and baking powder!"</span><span class="token punctuation">,</span>
+          <span class="token property">"WebsiteURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"example.com/thisepisodevideo"</span><span class="token punctuation">,</span>
+            <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Link to this episode's video"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"ImageURL"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"hhttps://example.com/image.jpg"</span><span class="token punctuation">,</span>
+            <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Episode art image thumbnail"</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">"AudioURL"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/something.mp3"</span><span class="token punctuation">,</span>
+              <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"High quality audio file, mp3"</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"DateCreated"</span><span class="token operator">:</span> <span class="token string">"2021-05-17"</span><span class="token punctuation">,</span>
+          <span class="token property">"DateUpdated"</span><span class="token operator">:</span> <span class="token string">"2021-05-17"</span><span class="token punctuation">,</span>
+          <span class="token property">"DurationSeconds"</span><span class="token operator">:</span> <span class="token number">6142</span><span class="token punctuation">,</span>
+          <span class="token property">"CitedURL"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://youtube.com/donut-time"</span><span class="token punctuation">,</span>
+              <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"This is our YouTube channel, subscribe for more podcasts!"</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"TranscriptionURL"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"EpisodeCredit"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"loudy"</span><span class="token punctuation">,</span>
+              <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator"</span><span class="token punctuation">,</span>
+              <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/loudy"</span><span class="token punctuation">,</span>
+                  <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"loudy's profile page"</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"Name"</span><span class="token operator">:</span> <span class="token string">"Mr Kruller"</span><span class="token punctuation">,</span>
+              <span class="token property">"Role"</span><span class="token operator">:</span> <span class="token string">"Creator, Editor"</span><span class="token punctuation">,</span>
+              <span class="token property">"Links"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">"URL"</span><span class="token operator">:</span> <span class="token string">"https://example.com/Mr. Kruller"</span><span class="token punctuation">,</span>
+                  <span class="token property">"Description"</span><span class="token operator">:</span> <span class="token string">"Mr Kruller's profile page"</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">"Chapters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Intro"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"nobody responded when we asked who had questions about donut-time"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">105</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"grams"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the two gram  thing "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">325</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">" "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"  "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">422</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">" "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">" "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">463</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"v1"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the price of perfection"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">690</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"fermenting!'"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the flies are in the dough"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">750</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"mixer issues"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"this is good yeast"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">788</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"we're back"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"welcome back guys "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">805</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"reduction"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"2 parts flour"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">939</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Harris"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"Harris and the wooden spoon era"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">1380</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"baking"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the downfall of gluten"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">1570</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"cookies"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"bakingcookies "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">1985</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Old Days"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the hard beginnings of the croissant"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">2452</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"FAQ"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"too much dough"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">2500</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"icing"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"is there such a thing as too much"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">2640</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"selling donuts"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"what is donutshop"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">2880</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Donut Shops"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"The biggest swedish muffin ever"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">3121</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Ideas"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"Onlydonuts"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">3300</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"bad donuts"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the rise of bad donuts"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">3450</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"nonoo"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"forks and fast spoons "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">4020</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"bad donuts, pt 2"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"how to identify a bad donut"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">4605</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"oreos"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the issue with tastiness"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">5380</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"V3"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"whats in store for next summer?"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">5640</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Raisins"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"the rise of the cheese danish"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">"StartTimeSeconds"</span><span class="token operator">:</span> <span class="token number">5970</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterName"</span><span class="token operator">:</span> <span class="token string">"Fin"</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterDescription"</span><span class="token operator">:</span> <span class="token string">"wrapping it up "</span><span class="token punctuation">,</span>
+              <span class="token property">"ChapterCredit"</span><span class="token operator">:</span> <span class="token null keyword">null</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</div></div></code></pre><h1 id="Type-Objects" data-id="Type-Objects"><a class="anchor hidden-xs" href="#Type-Objects" title="Type-Objects"><span class="octicon octicon-link"></span></a><span>Type Objects</span></h1><p><em><span>Objects are described as Go structs for the purposes of this document.</span></em></p><h3 id="Feed" data-id="Feed"><a class="anchor hidden-xs" href="#Feed" title="Feed"><span class="octicon octicon-link"></span></a><span>Feed</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> Feed <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Protocol           <span class="token builtin">string</span>
+	Version            <span class="token builtin">int</span>
+	NetworkName        <span class="token builtin">string</span>
+	NetworkDescription <span class="token builtin">string</span>
+	WebsiteURL         WebURL
+	FeedURL            WebURL
+	DateCreated        <span class="token builtin">string</span>
+	BannerURL          WebURL
+	AvatarURL          WebURL
+	FavIcoURL          WebURL
+	Tags               <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	FeedCredit         <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+	Shows              <span class="token punctuation">[</span><span class="token punctuation">]</span>Show
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Show" data-id="Show"><a class="anchor hidden-xs" href="#Show" title="Show"><span class="octicon octicon-link"></span></a><span>Show</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> Show <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	ShowName        <span class="token builtin">string</span>
+	ShowDescription <span class="token builtin">string</span>
+	WebsiteURL      WebURL
+	DateCreated     <span class="token builtin">string</span>
+	BannerURL       WebURL
+	AvatarURL       WebURL
+	FavIcoURL       WebURL
+	Tags            <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	ShowCredit      <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+	Episodes        <span class="token punctuation">[</span><span class="token punctuation">]</span>Episode
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Episode" data-id="Episode"><a class="anchor hidden-xs" href="#Episode" title="Episode"><span class="octicon octicon-link"></span></a><span>Episode</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> Episode <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	SeriesNumber       <span class="token builtin">int</span>
+	EpisodeName        <span class="token builtin">string</span>
+	EpisodeDescription <span class="token builtin">string</span>
+	WebsiteURL         WebURL
+	ImageURL           WebURL
+	AudioURL           <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+	DateCreated        <span class="token builtin">string</span>
+	DateUpdated        <span class="token builtin">string</span>
+	DurationSeconds    <span class="token builtin">int</span>
+	CitedURL           <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+	TranscriptionURL   <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+	EpisodeCredit      <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+	Chapters           <span class="token punctuation">[</span><span class="token punctuation">]</span>Chapter
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Chapter" data-id="Chapter"><a class="anchor hidden-xs" href="#Chapter" title="Chapter"><span class="octicon octicon-link"></span></a><span>Chapter</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> Chapter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	StartTimeSeconds   <span class="token builtin">int</span>
+	ChapterName        <span class="token builtin">string</span>
+	ChapterDescription <span class="token builtin">string</span>
+	ChapterCredit      <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Credit" data-id="Credit"><a class="anchor hidden-xs" href="#Credit" title="Credit"><span class="octicon octicon-link"></span></a><span>Credit</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> Credit <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Name  <span class="token builtin">string</span>
+	Role  <span class="token builtin">string</span>
+	Links <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+<span class="token punctuation">}</span>
+</code></pre><h3 id="WebURL" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL" title="WebURL"><span class="octicon octicon-link"></span></a><span>WebURL</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> WebURL <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	URL         <span class="token builtin">string</span>
+	Description <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+</code></pre><h1 id="Type-Object-Definitions" data-id="Type-Object-Definitions"><a class="anchor hidden-xs" href="#Type-Object-Definitions" title="Type-Object-Definitions"><span class="octicon octicon-link"></span></a><span>Type Object Definitions</span></h1><h2 id="Feed-Object" data-id="Feed-Object"><a class="anchor hidden-xs" href="#Feed-Object" title="Feed-Object"><span class="octicon octicon-link"></span></a><span>Feed Object</span></h2><pre><code class="go hljs"><span class="token keyword">type</span> Feed <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Protocol           <span class="token builtin">string</span>
+	Version            <span class="token builtin">int</span>
+	NetworkName        <span class="token builtin">string</span>
+	NetworkDescription <span class="token builtin">string</span>
+	WebsiteURL         WebURL
+	FeedURL            WebURL
+	DateCreated        <span class="token builtin">string</span>
+	BannerURL          WebURL
+	AvatarURL          WebURL
+	FavIcoURL          WebURL
+	Tags               <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	FeedCredit         <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+	Shows              <span class="token punctuation">[</span><span class="token punctuation">]</span>Show
+<span class="token punctuation">}</span>
+</code></pre><h2 id="Feed-Object-Description" data-id="Feed-Object-Description"><a class="anchor hidden-xs" href="#Feed-Object-Description" title="Feed-Object-Description"><span class="octicon octicon-link"></span></a><span>Feed Object Description</span></h2><p><em><span>Feed is the root object. It encapsulates the other types.</span></em></p><h3 id="Protocol" data-id="Protocol"><a class="anchor hidden-xs" href="#Protocol" title="Protocol"><span class="octicon octicon-link"></span></a><span>Protocol</span></h3><h4 id="string-required" data-id="string-required"><a class="anchor hidden-xs" href="#string-required" title="string-required"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required</code></h4><p><span>The protocol identifier string informs any parsers that the following data conforms to the LOUD Syndication Protocol</span></p><h3 id="Version" data-id="Version"><a class="anchor hidden-xs" href="#Version" title="Version"><span class="octicon octicon-link"></span></a><span>Version</span></h3><h4 id="int-required" data-id="int-required"><a class="anchor hidden-xs" href="#int-required" title="int-required"><span class="octicon octicon-link"></span></a><code>int</code><span> </span><code>required</code></h4><p><span>The version identifier corresponds to protocol version revisions. Each new build increments the version.</span></p><h3 id="NetworkName" data-id="NetworkName"><a class="anchor hidden-xs" href="#NetworkName" title="NetworkName"><span class="octicon octicon-link"></span></a><span>NetworkName</span></h3><h4 id="string-required1" data-id="string-required"><a class="anchor hidden-xs" href="#string-required1" title="string-required1"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required</code></h4><p><span>The name of the network</span></p><h3 id="NetworkDescription" data-id="NetworkDescription"><a class="anchor hidden-xs" href="#NetworkDescription" title="NetworkDescription"><span class="octicon octicon-link"></span></a><span>NetworkDescription</span></h3><h4 id="string" data-id="string"><a class="anchor hidden-xs" href="#string" title="string"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>The network’s description</span></p><h3 id="WebsiteURL" data-id="WebsiteURL"><a class="anchor hidden-xs" href="#WebsiteURL" title="WebsiteURL"><span class="octicon octicon-link"></span></a><span>WebsiteURL</span></h3><h4 id="WebURL1" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL1" title="WebURL1"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>WebURL hyperlink to this show’s webpage</span></p><h3 id="FeedURL" data-id="FeedURL"><a class="anchor hidden-xs" href="#FeedURL" title="FeedURL"><span class="octicon octicon-link"></span></a><span>FeedURL</span></h3><h4 id="WebURL-required" data-id="WebURL-required"><a class="anchor hidden-xs" href="#WebURL-required" title="WebURL-required"><span class="octicon octicon-link"></span></a><code>WebURL</code><span> </span><code>required</code></h4><p><span>WebURL hyperlink to this network’s .loud file</span></p><h3 id="DateCreated" data-id="DateCreated"><a class="anchor hidden-xs" href="#DateCreated" title="DateCreated"><span class="octicon octicon-link"></span></a><span>DateCreated</span></h3><h4 id="string1" data-id="string"><a class="anchor hidden-xs" href="#string1" title="string1"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>ISO 8601 Date when the show was created</span></p><h3 id="BannerURL" data-id="BannerURL"><a class="anchor hidden-xs" href="#BannerURL" title="BannerURL"><span class="octicon octicon-link"></span></a><span>BannerURL</span></h3><h4 id="WebURL2" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL2" title="WebURL2"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Horizontal header banner, recommended 2:1 aspect ratio</span></p><h3 id="AvatarURL" data-id="AvatarURL"><a class="anchor hidden-xs" href="#AvatarURL" title="AvatarURL"><span class="octicon octicon-link"></span></a><span>AvatarURL</span></h3><h4 id="WebURL3" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL3" title="WebURL3"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Square network avatar, recommended 1:1 aspect ratio</span></p><h3 id="FavIcoURL" data-id="FavIcoURL"><a class="anchor hidden-xs" href="#FavIcoURL" title="FavIcoURL"><span class="octicon octicon-link"></span></a><span>FavIcoURL</span></h3><h4 id="WebURL4" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL4" title="WebURL4"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Favicon, recommended 1:1 aspect ratio</span></p><h3 id="FeedCredit" data-id="FeedCredit"><a class="anchor hidden-xs" href="#FeedCredit" title="FeedCredit"><span class="octicon octicon-link"></span></a><span>FeedCredit</span></h3><h4 id="Credit1" data-id="Credit"><a class="anchor hidden-xs" href="#Credit1" title="Credit1"><span class="octicon octicon-link"></span></a><code>[]Credit</code></h4><p><span>Credits for participants of this Feed</span></p><h3 id="Show1" data-id="Show"><a class="anchor hidden-xs" href="#Show1" title="Show1"><span class="octicon octicon-link"></span></a><span>Show</span></h3><h4 id="Show-required" data-id="Show-required"><a class="anchor hidden-xs" href="#Show-required" title="Show-required"><span class="octicon octicon-link"></span></a><code>[]Show</code><span> </span><code>required</code></h4><p><span>Show is the last item in the Feed object. Feed can have multiple Shows</span></p><h2 id="Show-Object" data-id="Show-Object"><a class="anchor hidden-xs" href="#Show-Object" title="Show-Object"><span class="octicon octicon-link"></span></a><span>Show Object</span></h2><pre><code class="go hljs"><span class="token keyword">type</span> Show <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	ShowName        <span class="token builtin">string</span>
+	ShowDescription <span class="token builtin">string</span>
+	WebsiteURL      WebURL
+	DateCreated     <span class="token builtin">string</span>
+	BannerURL       WebURL
+	AvatarURL       WebURL
+	FavIcoURL       WebURL
+	Tags            <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	ShowCredit      <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+	Episodes        <span class="token punctuation">[</span><span class="token punctuation">]</span>Episode
+<span class="token punctuation">}</span>
+</code></pre><h2 id="Show-Object-Description" data-id="Show-Object-Description"><a class="anchor hidden-xs" href="#Show-Object-Description" title="Show-Object-Description"><span class="octicon octicon-link"></span></a><span>Show Object Description</span></h2><p><em><span>Shows contain episodes and associated metadata.</span></em></p><h3 id="ShowName" data-id="ShowName"><a class="anchor hidden-xs" href="#ShowName" title="ShowName"><span class="octicon octicon-link"></span></a><span>ShowName</span></h3><h4 id="string-required2" data-id="string-required"><a class="anchor hidden-xs" href="#string-required2" title="string-required2"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required</code></h4><p><span>The name of the show</span></p><h3 id="ShowDescription" data-id="ShowDescription"><a class="anchor hidden-xs" href="#ShowDescription" title="ShowDescription"><span class="octicon octicon-link"></span></a><span>ShowDescription</span></h3><h4 id="string2" data-id="string"><a class="anchor hidden-xs" href="#string2" title="string2"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>The show’s description</span></p><h3 id="WebsiteURL1" data-id="WebsiteURL"><a class="anchor hidden-xs" href="#WebsiteURL1" title="WebsiteURL1"><span class="octicon octicon-link"></span></a><span>WebsiteURL</span></h3><h4 id="WebURL5" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL5" title="WebURL5"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>WebURL hyperlink to this show’s webpage</span></p><h3 id="DateCreated1" data-id="DateCreated"><a class="anchor hidden-xs" href="#DateCreated1" title="DateCreated1"><span class="octicon octicon-link"></span></a><span>DateCreated</span></h3><h4 id="string3" data-id="string"><a class="anchor hidden-xs" href="#string3" title="string3"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>ISO 8601 Date when the show was created</span></p><h3 id="BannerURL1" data-id="BannerURL"><a class="anchor hidden-xs" href="#BannerURL1" title="BannerURL1"><span class="octicon octicon-link"></span></a><span>BannerURL</span></h3><h4 id="WebURL6" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL6" title="WebURL6"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Horizontal header banner, recommended 4000x2000px minimum size, 2:1 aspect ratio</span></p><h3 id="AvatarURL1" data-id="AvatarURL"><a class="anchor hidden-xs" href="#AvatarURL1" title="AvatarURL1"><span class="octicon octicon-link"></span></a><span>AvatarURL</span></h3><h4 id="WebURL7" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL7" title="WebURL7"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Square show avatar, recommended 2000x2000px minimum size, 1:1 aspect ratio</span></p><h3 id="FavIcoURL1" data-id="FavIcoURL"><a class="anchor hidden-xs" href="#FavIcoURL1" title="FavIcoURL1"><span class="octicon octicon-link"></span></a><span>FavIcoURL</span></h3><h4 id="WebURL8" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL8" title="WebURL8"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Favicon, recommended 512x512px minimum size, 1:1 aspect ratio</span></p><h3 id="CreatorName" data-id="CreatorName"><a class="anchor hidden-xs" href="#CreatorName" title="CreatorName"><span class="octicon octicon-link"></span></a><span>CreatorName</span></h3><h4 id="string-required3" data-id="string-required"><a class="anchor hidden-xs" href="#string-required3" title="string-required3"><span class="octicon octicon-link"></span></a><code>[]string</code><span> </span><code>required</code></h4><p><span>List of show creators, staff, credited help</span></p><h3 id="Tags" data-id="Tags"><a class="anchor hidden-xs" href="#Tags" title="Tags"><span class="octicon octicon-link"></span></a><span>Tags</span></h3><h4 id="string4" data-id="string"><a class="anchor hidden-xs" href="#string4" title="string4"><span class="octicon octicon-link"></span></a><code>[]string</code></h4><p><span>List of associated keywords, related to this show</span></p><h3 id="ShowCredit" data-id="ShowCredit"><a class="anchor hidden-xs" href="#ShowCredit" title="ShowCredit"><span class="octicon octicon-link"></span></a><span>ShowCredit</span></h3><h4 id="Credit2" data-id="Credit"><a class="anchor hidden-xs" href="#Credit2" title="Credit2"><span class="octicon octicon-link"></span></a><code>[]Credit</code></h4><p><span>Credits for participants of this Show</span></p><h3 id="Episodes" data-id="Episodes"><a class="anchor hidden-xs" href="#Episodes" title="Episodes"><span class="octicon octicon-link"></span></a><span>Episodes</span></h3><h4 id="Episode-required" data-id="Episode-required"><a class="anchor hidden-xs" href="#Episode-required" title="Episode-required"><span class="octicon octicon-link"></span></a><code>[]Episode</code><span> </span><code>required</code></h4><p><span>List of episode objects, in series order</span></p><h2 id="Episode-Object" data-id="Episode-Object"><a class="anchor hidden-xs" href="#Episode-Object" title="Episode-Object"><span class="octicon octicon-link"></span></a><span>Episode Object</span></h2><pre><code class="go hljs"><span class="token keyword">type</span> Episode <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	SeriesNumber       <span class="token builtin">int</span>
+	EpisodeName        <span class="token builtin">string</span>
+	EpisodeDescription <span class="token builtin">string</span>
+	WebsiteURL         WebURL
+	ImageURL           WebURL
+	AudioURL           <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+	DateCreated        <span class="token builtin">string</span>
+	DateUpdated        <span class="token builtin">string</span>
+	DurationSeconds    <span class="token builtin">int</span>
+	CitedURL           <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+	TranscriptionURL   <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+	EpisodeCredit      <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+	Chapters           <span class="token punctuation">[</span><span class="token punctuation">]</span>Chapter
+<span class="token punctuation">}</span>
+</code></pre><h2 id="Episode-Object-Description" data-id="Episode-Object-Description"><a class="anchor hidden-xs" href="#Episode-Object-Description" title="Episode-Object-Description"><span class="octicon octicon-link"></span></a><span>Episode Object Description</span></h2><p><em><span>Episodes contain chapters and metadata</span></em></p><h3 id="SeriesNumber" data-id="SeriesNumber"><a class="anchor hidden-xs" href="#SeriesNumber" title="SeriesNumber"><span class="octicon octicon-link"></span></a><span>SeriesNumber</span></h3><h4 id="int-required1" data-id="int-required"><a class="anchor hidden-xs" href="#int-required1" title="int-required1"><span class="octicon octicon-link"></span></a><code>int</code><span> </span><code>required</code></h4><p><span>This number corresponds to the chronological position of this episode in the show’s timeline.</span></p><h3 id="EpisodeName" data-id="EpisodeName"><a class="anchor hidden-xs" href="#EpisodeName" title="EpisodeName"><span class="octicon octicon-link"></span></a><span>EpisodeName</span></h3><h4 id="string-required4" data-id="string-required"><a class="anchor hidden-xs" href="#string-required4" title="string-required4"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required</code></h4><p><span>Name of the episode</span></p><h3 id="EpisodeDescription" data-id="EpisodeDescription"><a class="anchor hidden-xs" href="#EpisodeDescription" title="EpisodeDescription"><span class="octicon octicon-link"></span></a><span>EpisodeDescription</span></h3><h4 id="string5" data-id="string"><a class="anchor hidden-xs" href="#string5" title="string5"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>Description of the episode</span></p><h3 id="WebsiteURL2" data-id="WebsiteURL"><a class="anchor hidden-xs" href="#WebsiteURL2" title="WebsiteURL2"><span class="octicon octicon-link"></span></a><span>WebsiteURL</span></h3><h4 id="WebURL9" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL9" title="WebURL9"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>WebURL pointing to the webpage for this episode</span></p><h3 id="ImageURL" data-id="ImageURL"><a class="anchor hidden-xs" href="#ImageURL" title="ImageURL"><span class="octicon octicon-link"></span></a><span>ImageURL</span></h3><h4 id="WebURL10" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL10" title="WebURL10"><span class="octicon octicon-link"></span></a><code>WebURL</code></h4><p><span>Episode image, 4000x2000px recommended, 2:1 aspect ratio</span></p><h3 id="AudioURL" data-id="AudioURL"><a class="anchor hidden-xs" href="#AudioURL" title="AudioURL"><span class="octicon octicon-link"></span></a><span>AudioURL</span></h3><h4 id="WebURL-required1" data-id="WebURL-required"><a class="anchor hidden-xs" href="#WebURL-required1" title="WebURL-required1"><span class="octicon octicon-link"></span></a><code>[]WebURL</code><span> </span><code>required</code></h4><p><span>List of audio WebURLs, in order of quality or filesize, from first to last with the biggest or highest quality at the top</span></p><h3 id="DateCreated2" data-id="DateCreated"><a class="anchor hidden-xs" href="#DateCreated2" title="DateCreated2"><span class="octicon octicon-link"></span></a><span>DateCreated</span></h3><h4 id="string6" data-id="string"><a class="anchor hidden-xs" href="#string6" title="string6"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>ISO 8601 Date when the show was created</span></p><h3 id="DateUpdated" data-id="DateUpdated"><a class="anchor hidden-xs" href="#DateUpdated" title="DateUpdated"><span class="octicon octicon-link"></span></a><span>DateUpdated</span></h3><h4 id="string7" data-id="string"><a class="anchor hidden-xs" href="#string7" title="string7"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>ISO 8601 Date when the show was last updated</span></p><h3 id="DurationSeconds" data-id="DurationSeconds"><a class="anchor hidden-xs" href="#DurationSeconds" title="DurationSeconds"><span class="octicon octicon-link"></span></a><span>DurationSeconds</span></h3><h4 id="int" data-id="int"><a class="anchor hidden-xs" href="#int" title="int"><span class="octicon octicon-link"></span></a><code>int</code></h4><p><span>Number of seconds long total for the episode</span></p><h3 id="EpisodeHost" data-id="EpisodeHost"><a class="anchor hidden-xs" href="#EpisodeHost" title="EpisodeHost"><span class="octicon octicon-link"></span></a><span>EpisodeHost</span></h3><h4 id="string8" data-id="string"><a class="anchor hidden-xs" href="#string8" title="string8"><span class="octicon octicon-link"></span></a><code>[]string</code></h4><p><span>List of episode hosts</span></p><h3 id="EpisodeGuest" data-id="EpisodeGuest"><a class="anchor hidden-xs" href="#EpisodeGuest" title="EpisodeGuest"><span class="octicon octicon-link"></span></a><span>EpisodeGuest</span></h3><h4 id="string9" data-id="string"><a class="anchor hidden-xs" href="#string9" title="string9"><span class="octicon octicon-link"></span></a><code>[]string</code></h4><p><span>List of episode guests</span></p><h3 id="CitedURL" data-id="CitedURL"><a class="anchor hidden-xs" href="#CitedURL" title="CitedURL"><span class="octicon octicon-link"></span></a><span>CitedURL</span></h3><h4 id="WebURL11" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL11" title="WebURL11"><span class="octicon octicon-link"></span></a><code>[]WebURL</code></h4><p><span>List of WebURLs for citations or references in this episode</span></p><h3 id="TranscriptionURL" data-id="TranscriptionURL"><a class="anchor hidden-xs" href="#TranscriptionURL" title="TranscriptionURL"><span class="octicon octicon-link"></span></a><span>TranscriptionURL</span></h3><h4 id="WebURL12" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL12" title="WebURL12"><span class="octicon octicon-link"></span></a><code>[]WebURL</code></h4><p><span>List of transcription WebURLs, with the primary translation / transcription first</span></p><h3 id="EpisodeCredit" data-id="EpisodeCredit"><a class="anchor hidden-xs" href="#EpisodeCredit" title="EpisodeCredit"><span class="octicon octicon-link"></span></a><span>EpisodeCredit</span></h3><h4 id="Credit3" data-id="Credit"><a class="anchor hidden-xs" href="#Credit3" title="Credit3"><span class="octicon octicon-link"></span></a><code>[]Credit</code></h4><p><span>Credits for Episode participants</span></p><h3 id="Chapters" data-id="Chapters"><a class="anchor hidden-xs" href="#Chapters" title="Chapters"><span class="octicon octicon-link"></span></a><span>Chapters</span></h3><h4 id="Chapter1" data-id="Chapter"><a class="anchor hidden-xs" href="#Chapter1" title="Chapter1"><span class="octicon octicon-link"></span></a><code>[]Chapter</code></h4><p><span>List of episode chapters</span></p><h2 id="Chapter-Object" data-id="Chapter-Object"><a class="anchor hidden-xs" href="#Chapter-Object" title="Chapter-Object"><span class="octicon octicon-link"></span></a><span>Chapter Object</span></h2><pre><code class="go hljs"><span class="token keyword">type</span> Chapter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	StartTimeSeconds   <span class="token builtin">int</span>
+	ChapterName        <span class="token builtin">string</span>
+	ChapterDescription <span class="token builtin">string</span>
+	ChapterCredit      <span class="token punctuation">[</span><span class="token punctuation">]</span>Credit
+<span class="token punctuation">}</span>
+</code></pre><h2 id="Chapter-Object-Description" data-id="Chapter-Object-Description"><a class="anchor hidden-xs" href="#Chapter-Object-Description" title="Chapter-Object-Description"><span class="octicon octicon-link"></span></a><span>Chapter Object Description</span></h2><p><em><span>Chapters are subsections of a show, broken down by topic or segment</span></em></p><h3 id="StartTimeSeconds" data-id="StartTimeSeconds"><a class="anchor hidden-xs" href="#StartTimeSeconds" title="StartTimeSeconds"><span class="octicon octicon-link"></span></a><span>StartTimeSeconds</span></h3><h4 id="int-required-in-chapters" data-id="int-required-in-chapters"><a class="anchor hidden-xs" href="#int-required-in-chapters" title="int-required-in-chapters"><span class="octicon octicon-link"></span></a><code>int</code><span> </span><code>required in chapters</code></h4><p><span>Start time for this chapter, measured in seconds. If the first chapter listed has a StartTime of greater than 0, the previous chapter will be labeled with a chapter name of ‘intro’</span></p><h3 id="ChapterName" data-id="ChapterName"><a class="anchor hidden-xs" href="#ChapterName" title="ChapterName"><span class="octicon octicon-link"></span></a><span>ChapterName</span></h3><h4 id="string-required-in-chapters" data-id="string-required-in-chapters"><a class="anchor hidden-xs" href="#string-required-in-chapters" title="string-required-in-chapters"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required in chapters</code></h4><p><span>Name of this chapter</span></p><h3 id="ChapterDescription" data-id="ChapterDescription"><a class="anchor hidden-xs" href="#ChapterDescription" title="ChapterDescription"><span class="octicon octicon-link"></span></a><span>ChapterDescription</span></h3><h4 id="string10" data-id="string"><a class="anchor hidden-xs" href="#string10" title="string10"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>Description of this chapter</span></p><h3 id="ChapterCredit" data-id="ChapterCredit"><a class="anchor hidden-xs" href="#ChapterCredit" title="ChapterCredit"><span class="octicon octicon-link"></span></a><span>ChapterCredit</span></h3><h4 id="Credit4" data-id="Credit"><a class="anchor hidden-xs" href="#Credit4" title="Credit4"><span class="octicon octicon-link"></span></a><code>[]Credit</code></h4><p><span>Credits for Chapter participants</span></p><h2 id="Credit-Object" data-id="Credit-Object"><a class="anchor hidden-xs" href="#Credit-Object" title="Credit-Object"><span class="octicon octicon-link"></span></a><span>Credit Object</span></h2><pre><code class="go hljs"><span class="token keyword">type</span> Credit <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Name  <span class="token builtin">string</span>
+	Role  <span class="token builtin">string</span>
+	Links <span class="token punctuation">[</span><span class="token punctuation">]</span>WebURL
+<span class="token punctuation">}</span>
+</code></pre><h2 id="Credit-Object-Description" data-id="Credit-Object-Description"><a class="anchor hidden-xs" href="#Credit-Object-Description" title="Credit-Object-Description"><span class="octicon octicon-link"></span></a><span>Credit Object Description</span></h2><p><em><span>Credits are a way to credit a person with proper attribution</span></em></p><h3 id="Name" data-id="Name"><a class="anchor hidden-xs" href="#Name" title="Name"><span class="octicon octicon-link"></span></a><span>Name</span></h3><h4 id="string-required5" data-id="string-required"><a class="anchor hidden-xs" href="#string-required5" title="string-required5"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required</code></h4><p><span>The name of this content creator</span></p><h3 id="Role" data-id="Role"><a class="anchor hidden-xs" href="#Role" title="Role"><span class="octicon octicon-link"></span></a><span>Role</span></h3><h4 id="string11" data-id="string"><a class="anchor hidden-xs" href="#string11" title="string11"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>The role of this content creator within context of this Credit</span></p><h3 id="Links" data-id="Links"><a class="anchor hidden-xs" href="#Links" title="Links"><span class="octicon octicon-link"></span></a><span>Links</span></h3><h4 id="WebURL13" data-id="WebURL"><a class="anchor hidden-xs" href="#WebURL13" title="WebURL13"><span class="octicon octicon-link"></span></a><code>[]WebURL</code></h4><p><span>A list of contact WebURLs whether they be mailto links or links to social media profiles or personal projects</span></p><h3 id="WebURL-Object" data-id="WebURL-Object"><a class="anchor hidden-xs" href="#WebURL-Object" title="WebURL-Object"><span class="octicon octicon-link"></span></a><span>WebURL Object</span></h3><pre><code class="go hljs"><span class="token keyword">type</span> WebURL <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	URL         <span class="token builtin">string</span>
+	Description <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="WebURL-Object-Description" data-id="WebURL-Object-Description"><a class="anchor hidden-xs" href="#WebURL-Object-Description" title="WebURL-Object-Description"><span class="octicon octicon-link"></span></a><span>WebURL Object Description</span></h2><p><em><span>WebURLs are hyperlinks with a description.</span></em></p><h3 id="URL" data-id="URL"><a class="anchor hidden-xs" href="#URL" title="URL"><span class="octicon octicon-link"></span></a><span>URL</span></h3><h4 id="string-required6" data-id="string-required"><a class="anchor hidden-xs" href="#string-required6" title="string-required6"><span class="octicon octicon-link"></span></a><code>string</code><span> </span><code>required</code></h4><p><span>A hyperlink</span></p><h3 id="Description" data-id="Description"><a class="anchor hidden-xs" href="#Description" title="Description"><span class="octicon octicon-link"></span></a><span>Description</span></h3><h4 id="string12" data-id="string"><a class="anchor hidden-xs" href="#string12" title="string12"><span class="octicon octicon-link"></span></a><code>string</code></h4><p><span>Short description of the content linked to by the URL.</span></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li><a href="#LOUD-Feed-Format-v002" title="LOUD Feed Format v0.0.2">LOUD Feed Format v0.0.2</a><ul class="nav">
+<li><a href="#Proposal-for-a-podcasting-first-feed-syndication-protocol" title="Proposal for a podcasting-first feed syndication protocol">Proposal for a podcasting-first feed syndication protocol</a><ul class="nav">
+<li><a href="#File-Extensions" title="File Extensions">File Extensions</a></li>
+<li><a href="#File-Format" title="File Format">File Format</a></li>
+<li><a href="#Enhanced-Discovery" title="Enhanced Discovery">Enhanced Discovery</a></li>
+<li><a href="#Chaptered-Episodes" title="Chaptered Episodes">Chaptered Episodes</a></li>
+<li><a href="#Multiple-Format-Audio" title="Multiple Format Audio">Multiple Format Audio</a></li>
+<li><a href="#Credit-Everyone" title="Credit Everyone">Credit Everyone</a></li>
+<li><a href="#References-Citations" title="References Citations">References Citations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#FAQ" title="FAQ">FAQ</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Why-not-use-RSS" title="Why not use RSS?">Why not use RSS?</a></li>
+<li><a href="#Why-not-improve-an-existing-protocol" title="Why not improve an existing protocol?">Why not improve an existing protocol?</a></li>
+<li><a href="#Why-multiple-shows-in-the-same-feed" title="Why multiple shows in the same feed?">Why multiple shows in the same feed?</a></li>
+<li><a href="#Is-LOUD-an-IETF-standard" title="Is LOUD an IETF standard?">Is LOUD an IETF standard?</a></li>
+<li><a href="#How-can-I-help" title="How can I help?">How can I help?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#License" title="License">License</a></li>
+<li><a href="#Example" title="Example">Example</a><ul class="nav">
+<li><a href="#JSON" title="JSON">JSON</a></li>
+</ul>
+</li>
+<li><a href="#Type-Objects" title="Type Objects">Type Objects</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Feed" title="Feed">Feed</a></li>
+<li><a href="#Show" title="Show">Show</a></li>
+<li><a href="#Episode" title="Episode">Episode</a></li>
+<li><a href="#Chapter" title="Chapter">Chapter</a></li>
+<li><a href="#Credit" title="Credit">Credit</a></li>
+<li><a href="#WebURL" title="WebURL">WebURL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Type-Object-Definitions" title="Type Object Definitions">Type Object Definitions</a><ul class="nav">
+<li><a href="#Feed-Object" title="Feed Object">Feed Object</a></li>
+<li><a href="#Feed-Object-Description" title="Feed Object Description">Feed Object Description</a><ul class="nav">
+<li><a href="#Protocol" title="Protocol">Protocol</a></li>
+<li><a href="#Version" title="Version">Version</a></li>
+<li><a href="#NetworkName" title="NetworkName">NetworkName</a></li>
+<li><a href="#NetworkDescription" title="NetworkDescription">NetworkDescription</a></li>
+<li><a href="#WebsiteURL" title="WebsiteURL">WebsiteURL</a></li>
+<li><a href="#FeedURL" title="FeedURL">FeedURL</a></li>
+<li><a href="#DateCreated" title="DateCreated">DateCreated</a></li>
+<li><a href="#BannerURL" title="BannerURL">BannerURL</a></li>
+<li><a href="#AvatarURL" title="AvatarURL">AvatarURL</a></li>
+<li><a href="#FavIcoURL" title="FavIcoURL">FavIcoURL</a></li>
+<li><a href="#FeedCredit" title="FeedCredit">FeedCredit</a></li>
+<li><a href="#Show1" title="Show">Show</a></li>
+</ul>
+</li>
+<li><a href="#Show-Object" title="Show Object">Show Object</a></li>
+<li><a href="#Show-Object-Description" title="Show Object Description">Show Object Description</a><ul class="nav">
+<li><a href="#ShowName" title="ShowName">ShowName</a></li>
+<li><a href="#ShowDescription" title="ShowDescription">ShowDescription</a></li>
+<li><a href="#WebsiteURL1" title="WebsiteURL">WebsiteURL</a></li>
+<li><a href="#DateCreated1" title="DateCreated">DateCreated</a></li>
+<li><a href="#BannerURL1" title="BannerURL">BannerURL</a></li>
+<li><a href="#AvatarURL1" title="AvatarURL">AvatarURL</a></li>
+<li><a href="#FavIcoURL1" title="FavIcoURL">FavIcoURL</a></li>
+<li><a href="#CreatorName" title="CreatorName">CreatorName</a></li>
+<li><a href="#Tags" title="Tags">Tags</a></li>
+<li><a href="#ShowCredit" title="ShowCredit">ShowCredit</a></li>
+<li><a href="#Episodes" title="Episodes">Episodes</a></li>
+</ul>
+</li>
+<li><a href="#Episode-Object" title="Episode Object">Episode Object</a></li>
+<li><a href="#Episode-Object-Description" title="Episode Object Description">Episode Object Description</a><ul class="nav">
+<li><a href="#SeriesNumber" title="SeriesNumber">SeriesNumber</a></li>
+<li><a href="#EpisodeName" title="EpisodeName">EpisodeName</a></li>
+<li><a href="#EpisodeDescription" title="EpisodeDescription">EpisodeDescription</a></li>
+<li><a href="#WebsiteURL2" title="WebsiteURL">WebsiteURL</a></li>
+<li><a href="#ImageURL" title="ImageURL">ImageURL</a></li>
+<li><a href="#AudioURL" title="AudioURL">AudioURL</a></li>
+<li><a href="#DateCreated2" title="DateCreated">DateCreated</a></li>
+<li><a href="#DateUpdated" title="DateUpdated">DateUpdated</a></li>
+<li><a href="#DurationSeconds" title="DurationSeconds">DurationSeconds</a></li>
+<li><a href="#EpisodeHost" title="EpisodeHost">EpisodeHost</a></li>
+<li><a href="#EpisodeGuest" title="EpisodeGuest">EpisodeGuest</a></li>
+<li><a href="#CitedURL" title="CitedURL">CitedURL</a></li>
+<li><a href="#TranscriptionURL" title="TranscriptionURL">TranscriptionURL</a></li>
+<li><a href="#EpisodeCredit" title="EpisodeCredit">EpisodeCredit</a></li>
+<li><a href="#Chapters" title="Chapters">Chapters</a></li>
+</ul>
+</li>
+<li><a href="#Chapter-Object" title="Chapter Object">Chapter Object</a></li>
+<li><a href="#Chapter-Object-Description" title="Chapter Object Description">Chapter Object Description</a><ul class="nav">
+<li><a href="#StartTimeSeconds" title="StartTimeSeconds">StartTimeSeconds</a></li>
+<li><a href="#ChapterName" title="ChapterName">ChapterName</a></li>
+<li><a href="#ChapterDescription" title="ChapterDescription">ChapterDescription</a></li>
+<li><a href="#ChapterCredit" title="ChapterCredit">ChapterCredit</a></li>
+</ul>
+</li>
+<li><a href="#Credit-Object" title="Credit Object">Credit Object</a></li>
+<li><a href="#Credit-Object-Description" title="Credit Object Description">Credit Object Description</a><ul class="nav">
+<li><a href="#Name" title="Name">Name</a></li>
+<li><a href="#Role" title="Role">Role</a></li>
+<li><a href="#Links" title="Links">Links</a></li>
+<li><a href="#WebURL-Object" title="WebURL Object">WebURL Object</a></li>
+</ul>
+</li>
+<li><a href="#WebURL-Object-Description" title="WebURL Object Description">WebURL Object Description</a><ul class="nav">
+<li><a href="#URL" title="URL">URL</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li><a href="#LOUD-Feed-Format-v002" title="LOUD Feed Format v0.0.2">LOUD Feed Format v0.0.2</a><ul class="nav">
+<li><a href="#Proposal-for-a-podcasting-first-feed-syndication-protocol" title="Proposal for a podcasting-first feed syndication protocol">Proposal for a podcasting-first feed syndication protocol</a><ul class="nav">
+<li><a href="#File-Extensions" title="File Extensions">File Extensions</a></li>
+<li><a href="#File-Format" title="File Format">File Format</a></li>
+<li><a href="#Enhanced-Discovery" title="Enhanced Discovery">Enhanced Discovery</a></li>
+<li><a href="#Chaptered-Episodes" title="Chaptered Episodes">Chaptered Episodes</a></li>
+<li><a href="#Multiple-Format-Audio" title="Multiple Format Audio">Multiple Format Audio</a></li>
+<li><a href="#Credit-Everyone" title="Credit Everyone">Credit Everyone</a></li>
+<li><a href="#References-Citations" title="References Citations">References Citations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#FAQ" title="FAQ">FAQ</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Why-not-use-RSS" title="Why not use RSS?">Why not use RSS?</a></li>
+<li><a href="#Why-not-improve-an-existing-protocol" title="Why not improve an existing protocol?">Why not improve an existing protocol?</a></li>
+<li><a href="#Why-multiple-shows-in-the-same-feed" title="Why multiple shows in the same feed?">Why multiple shows in the same feed?</a></li>
+<li><a href="#Is-LOUD-an-IETF-standard" title="Is LOUD an IETF standard?">Is LOUD an IETF standard?</a></li>
+<li><a href="#How-can-I-help" title="How can I help?">How can I help?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#License" title="License">License</a></li>
+<li><a href="#Example" title="Example">Example</a><ul class="nav">
+<li><a href="#JSON" title="JSON">JSON</a></li>
+</ul>
+</li>
+<li><a href="#Type-Objects" title="Type Objects">Type Objects</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li><a href="#Feed" title="Feed">Feed</a></li>
+<li><a href="#Show" title="Show">Show</a></li>
+<li><a href="#Episode" title="Episode">Episode</a></li>
+<li><a href="#Chapter" title="Chapter">Chapter</a></li>
+<li><a href="#Credit" title="Credit">Credit</a></li>
+<li><a href="#WebURL" title="WebURL">WebURL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Type-Object-Definitions" title="Type Object Definitions">Type Object Definitions</a><ul class="nav">
+<li><a href="#Feed-Object" title="Feed Object">Feed Object</a></li>
+<li><a href="#Feed-Object-Description" title="Feed Object Description">Feed Object Description</a><ul class="nav">
+<li><a href="#Protocol" title="Protocol">Protocol</a></li>
+<li><a href="#Version" title="Version">Version</a></li>
+<li><a href="#NetworkName" title="NetworkName">NetworkName</a></li>
+<li><a href="#NetworkDescription" title="NetworkDescription">NetworkDescription</a></li>
+<li><a href="#WebsiteURL" title="WebsiteURL">WebsiteURL</a></li>
+<li><a href="#FeedURL" title="FeedURL">FeedURL</a></li>
+<li><a href="#DateCreated" title="DateCreated">DateCreated</a></li>
+<li><a href="#BannerURL" title="BannerURL">BannerURL</a></li>
+<li><a href="#AvatarURL" title="AvatarURL">AvatarURL</a></li>
+<li><a href="#FavIcoURL" title="FavIcoURL">FavIcoURL</a></li>
+<li><a href="#FeedCredit" title="FeedCredit">FeedCredit</a></li>
+<li><a href="#Show1" title="Show">Show</a></li>
+</ul>
+</li>
+<li><a href="#Show-Object" title="Show Object">Show Object</a></li>
+<li><a href="#Show-Object-Description" title="Show Object Description">Show Object Description</a><ul class="nav">
+<li><a href="#ShowName" title="ShowName">ShowName</a></li>
+<li><a href="#ShowDescription" title="ShowDescription">ShowDescription</a></li>
+<li><a href="#WebsiteURL1" title="WebsiteURL">WebsiteURL</a></li>
+<li><a href="#DateCreated1" title="DateCreated">DateCreated</a></li>
+<li><a href="#BannerURL1" title="BannerURL">BannerURL</a></li>
+<li><a href="#AvatarURL1" title="AvatarURL">AvatarURL</a></li>
+<li><a href="#FavIcoURL1" title="FavIcoURL">FavIcoURL</a></li>
+<li><a href="#CreatorName" title="CreatorName">CreatorName</a></li>
+<li><a href="#Tags" title="Tags">Tags</a></li>
+<li><a href="#ShowCredit" title="ShowCredit">ShowCredit</a></li>
+<li><a href="#Episodes" title="Episodes">Episodes</a></li>
+</ul>
+</li>
+<li><a href="#Episode-Object" title="Episode Object">Episode Object</a></li>
+<li><a href="#Episode-Object-Description" title="Episode Object Description">Episode Object Description</a><ul class="nav">
+<li><a href="#SeriesNumber" title="SeriesNumber">SeriesNumber</a></li>
+<li><a href="#EpisodeName" title="EpisodeName">EpisodeName</a></li>
+<li><a href="#EpisodeDescription" title="EpisodeDescription">EpisodeDescription</a></li>
+<li><a href="#WebsiteURL2" title="WebsiteURL">WebsiteURL</a></li>
+<li><a href="#ImageURL" title="ImageURL">ImageURL</a></li>
+<li><a href="#AudioURL" title="AudioURL">AudioURL</a></li>
+<li><a href="#DateCreated2" title="DateCreated">DateCreated</a></li>
+<li><a href="#DateUpdated" title="DateUpdated">DateUpdated</a></li>
+<li><a href="#DurationSeconds" title="DurationSeconds">DurationSeconds</a></li>
+<li><a href="#EpisodeHost" title="EpisodeHost">EpisodeHost</a></li>
+<li><a href="#EpisodeGuest" title="EpisodeGuest">EpisodeGuest</a></li>
+<li><a href="#CitedURL" title="CitedURL">CitedURL</a></li>
+<li><a href="#TranscriptionURL" title="TranscriptionURL">TranscriptionURL</a></li>
+<li><a href="#EpisodeCredit" title="EpisodeCredit">EpisodeCredit</a></li>
+<li><a href="#Chapters" title="Chapters">Chapters</a></li>
+</ul>
+</li>
+<li><a href="#Chapter-Object" title="Chapter Object">Chapter Object</a></li>
+<li><a href="#Chapter-Object-Description" title="Chapter Object Description">Chapter Object Description</a><ul class="nav">
+<li><a href="#StartTimeSeconds" title="StartTimeSeconds">StartTimeSeconds</a></li>
+<li><a href="#ChapterName" title="ChapterName">ChapterName</a></li>
+<li><a href="#ChapterDescription" title="ChapterDescription">ChapterDescription</a></li>
+<li><a href="#ChapterCredit" title="ChapterCredit">ChapterCredit</a></li>
+</ul>
+</li>
+<li><a href="#Credit-Object" title="Credit Object">Credit Object</a></li>
+<li><a href="#Credit-Object-Description" title="Credit Object Description">Credit Object Description</a><ul class="nav">
+<li><a href="#Name" title="Name">Name</a></li>
+<li><a href="#Role" title="Role">Role</a></li>
+<li><a href="#Links" title="Links">Links</a></li>
+<li><a href="#WebURL-Object" title="WebURL Object">WebURL Object</a></li>
+</ul>
+</li>
+<li><a href="#WebURL-Object-Description" title="WebURL Object Description">WebURL Object Description</a><ul class="nav">
+<li><a href="#URL" title="URL">URL</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
